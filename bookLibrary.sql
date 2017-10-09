@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 09, 2017 at 09:32 pm
+-- Generation Time: Oct 10, 2017 at 12:51 am
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -36,7 +36,7 @@ CREATE TABLE `authors` (
 --
 
 INSERT INTO `authors` (`id`, `name`) VALUES
-(1, 'Author 1'),
+(1, 'J.K Rowling'),
 (2, 'Author 2');
 
 -- --------------------------------------------------------
@@ -58,10 +58,8 @@ CREATE TABLE `books` (
 --
 
 INSERT INTO `books` (`id`, `title`, `year`, `description`, `author_id`) VALUES
-(1, 'Book 1', 1993, 'This is book 1', 1),
-(2, 'Book 2', 2004, 'This is Book 2', 2),
-(3, 'Book 3', 2004, 'This is book 3', 1),
-(4, 'book 4', 2001, 'FGdsagfdgdfgdfsgf', 1);
+(2, 'Harry Potter', 1997, 'This is first Harry Potter Book ', 1),
+(4, 'Harry Potter 2', 2000, 'THis is the second book', 1);
 
 --
 -- Indexes for dumped tables

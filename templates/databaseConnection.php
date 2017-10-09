@@ -4,5 +4,5 @@
 	if(!$dbc){
 		die("Could not connect to database");
 	} else {
-		var_dump("connection is good");
+		// var_dump("connection is good");
 	}
