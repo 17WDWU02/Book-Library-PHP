@@ -32,7 +32,7 @@
                     <tbody>
                         <?php foreach($books as $book): ?>
                             <tr>
-                                <td><a href=""><?=$book['title'];?></a></td>
+                                <td><a href="book.php?id=<?=$book['bookID']?>"><?=$book['title'];?></a></td>
                                 <td><?= $book['name'];?></td>
                                 <td><?= substr($book['description'], 0 , 100);  ?></td>
                                 <td><?= $book['year'];?></td>

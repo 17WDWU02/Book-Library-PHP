@@ -8,8 +8,8 @@
 
 		if(!$title){
 			array_push($errors, "Please enter a title");
-		} else if(strlen($title) < 5){
-			array_push($errors, "Please enter more than 5 characters into the title");
+		} else if(strlen($title) < 1){
+			array_push($errors, "Please enter more than 1 characters into the title");
 		} else if(strlen($title) > 100){
 			array_push($errors, "Cant be more than 100 characters");
 		}
@@ -22,11 +22,21 @@
 			array_push($errors, "Please enter a year");
 		}
 
-		if(!$authorid){
-			array_push($errors, "Please check an author, or add a new one");
+		if($author){
+			if(empty($errors)){
+				$sql = "INSERT INTO authors VALUES(NULL, '$author')";
+				$result = mysqli_query($dbc, $sql);
+				if($result && mysqli_affected_rows($dbc) > 0){
+					$authorid = $dbc->insert_id;
+				} else {
+					die("Cannot add authors to the database");
+				}
+			}
+		} else {
+			if(!isset($authorid)){
+				array_push($errors, "Please check an author, or add a new one");
+			}
 		}
-
-
 
 		if(empty($errors)){
 			$title = mysqli_real_escape_string($dbc, $title);
@@ -61,6 +71,13 @@
 	<head>
 		<meta charset="utf-8">
 		<?php require("templates/styles.php"); ?>
+		<?php if(isset($author)): ?>
+			<style type="text/css">
+				#author{
+					display: block;
+				}
+			</style>
+		<?php endif; ?>
 	</head>
 	<body>
 		<div class="container">
@@ -96,7 +113,7 @@
 					<?php endforeach; ?>
 					<br>
 					<button type="button" name="button" id="addNewAuthor" class="btn btn-link">add new author</button>
-					<input type="text" class="form-control" id="author" name="author" placeholder="Author" value="">
+					<input type="text" class="form-control" id="author" name="author" placeholder="Author" value="<?php if(isset($_POST['author'])){echo $_POST['author'];}?>">
 				</div>
 				<div class="form-group">
 					<label for="description">Book Description</label>

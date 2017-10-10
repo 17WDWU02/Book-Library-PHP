@@ -1,6 +1,16 @@
 <?php 
-
+    require("templates/databaseConnection.php");
     $currentPage = "Book";
+
+    $id = $_GET['id'];
+    $sql = "SELECT books.id as bookID, title, year, description, name, authors.id as authorID FROM books INNER JOIN authors ON books.author_id = authors.id WHERE books.id = $id";
+    $result = mysqli_query($dbc, $sql);
+    if($result){
+        $book = mysqli_fetch_array($result, MYSQLI_ASSOC);
+    } else {
+        die("Cannot get the data for the book");
+    }
+
 
  ?>
 
@@ -16,11 +26,11 @@
 
         <?php require("templates/nav.php"); ?>
 
-          <!--   <h2>Harry Potter and the Philosopher's Stone</h2>
-            <h4>J. K. Rowling</h4>
-            <p><small>1997</small></p>
+            <h2><?= $book['title'];?></h2>
+            <h4><?= $book['name']; ?></h4>
+            <p><small><?= $book['year'];?></small></p>
             <hr>
-            <p>First Book in the Harry Potter Series</p> -->
+            <p><?= $book['description']; ?></p>
 
             <!-- <a href="editBooks.php" class="btn btn-warning">Edit Book</a> -->
 
