@@ -5,9 +5,11 @@
     $id = $_GET['id'];
     $sql = "SELECT books.id as bookID, title, year, description, name, authors.id as authorID FROM books INNER JOIN authors ON books.author_id = authors.id WHERE books.id = $id";
     $result = mysqli_query($dbc, $sql);
-    if($result){
+    if($result && mysqli_affected_rows($dbc) > 0){
         $book = mysqli_fetch_array($result, MYSQLI_ASSOC);
-    } else {
+    } else if (mysqli_affected_rows($dbc) == 0){
+        header("Location: error404.php");
+    }else {
         die("Cannot get the data for the book");
     }
 
