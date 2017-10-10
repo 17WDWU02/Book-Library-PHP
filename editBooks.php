@@ -40,6 +40,19 @@
 			}
 		}
 
+		if(empty($errors)){
+			$title = mysqli_real_escape_string($dbc, $title);
+			$year = mysqli_real_escape_string($dbc, $year);
+			$description = mysqli_real_escape_string($dbc, $description);
+			$sql = "UPDATE `books` SET `title`='$title',`year`='$year',`description`='$description',`author_id`='$authorid' WHERE id = $id";
+			$result = mysqli_query($dbc, $sql);
+			if($result){
+		   		header("Location: book.php?id=$id");
+		   	} else{
+		   		die("Something went wrong, can't update entry into database");
+			}
+		}
+
 	} else {
 		$sql = "SELECT books.id as bookID, title, year, description, name, authors.id as authorid FROM books INNER JOIN authors ON books.author_id = authors.id WHERE books.id = $id";
 	    $result = mysqli_query($dbc, $sql);
@@ -93,7 +106,7 @@
 				</div>
 			<?php endif; ?>
 
-			<form action="editBooks.php?id=<?=$book['bookID'];?>" method="post">
+			<form action="editBooks.php?id=<?=$id;?>" method="post">
 				<div class="form-group">
 					<label for="title">Book Title</label>
 					<input type="text" class="form-control" id="title" name="title" placeholder="Title" value="<?=$book['title']; ?>">

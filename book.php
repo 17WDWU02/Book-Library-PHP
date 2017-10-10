@@ -34,6 +34,7 @@
             <p><?= $book['description']; ?></p>
 
             <a href="editBooks.php?id=<?= $book['bookID']; ?>" class="btn btn-warning">Edit Book</a>
+            <a href="deleteBooks.php?id=<?= $book['bookID']; ?>" class="btn btn-danger">Delete Book</a>
 
         </div>
         <?php require("templates/scripts.php"); ?>
