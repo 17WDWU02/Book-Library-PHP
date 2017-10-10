@@ -12,6 +12,7 @@
     }
 
 
+
  ?>
 
 
@@ -32,7 +33,7 @@
             <hr>
             <p><?= $book['description']; ?></p>
 
-            <!-- <a href="editBooks.php" class="btn btn-warning">Edit Book</a> -->
+            <a href="editBooks.php?id=<?= $book['bookID']; ?>" class="btn btn-warning">Edit Book</a>
 
         </div>
         <?php require("templates/scripts.php"); ?>
